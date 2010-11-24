@@ -22,6 +22,27 @@
 		 		<h1 class="logotype">#CIRCA</h1>
 
 		 	</div><!-- exit #header-->
+		 	<div id="highlights">
+			 	<h2>Header Level 2</h2>
+			 	<a href="#"><img src="images/twitpic_test.gif" alt="twitpic" /></a>
+			 	<span class="caption">Lorem ipsum dolor set amit.</span>
+				<a href="#"><img src="images/twitpic_test-2.gif" alt="twitpic" /></a>
+				<span class="caption">Lorem ipsum dolor set amit.</span>						       
+					<ol>
+					   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+					   <li>Aliquam tincidunt mauris eu risus.</li>
+					</ol>
+					
+					<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+					
+					<h3>Header Level 3</h3>
+					
+					<ul>
+					   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+					   <li>Aliquam tincidunt mauris eu risus.</li>
+					</ul>
+
+		 	</div><!-- exit #highlights-->
 		 	<div id="content">
 				<h1>HTML Ipsum Presents</h1>
 					       
