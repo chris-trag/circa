@@ -19,6 +19,15 @@ div#header h1 a{}
 div#highlights{width:300px; float:right; background:url() #f3f4f9; padding:12px;}
 /*=-=-=-[ CONTENT ]=-=-=-=-=-=-*/
 div#content{width:600px;}
+div#content ul.scroll{margin-left:0px;}
+div#content ul.scroll li{list-style-type: none; clear:left;}
+div#content ul.scroll a.avatar{float:left; margin-right:8px; margin-bottom:8px; 
+background-color:white; padding:5px;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+span.date a{color:#666; font-size:10px; text-decoration:none; padding-left:18px;}
 /*=-=-=-[ FOOTER ]=-=-=-=-=-=-*/
 div#footer{}
 /*=-=-=-[ MISC ]=-=-=-=-=-=-*/
