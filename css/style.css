@@ -1,9 +1,10 @@
 /*Reset reloaded */html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}navul{list-style:none;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;}ins{background-color:#ff9;color:#000;text-decoration:none;}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold;}del{text-decoration:line-through;}abbr[title],dfn[title]{border-bottom:1pxdotted;cursor:help;}table{border-collapse:collapse;border-spacing:0;}hr{display:block;height:1px;border:0;border-top:1pxsolid#ccc;margin:1em0;padding:0;}input,select{vertical-align:middle;}
-body { font:16px/1.531 sans-serif; *font-size:small; }
+body { font:13px/1.5 Helvetica Neue,Arial,Helvetica,sans-serif; *font-size:small; }
 select, input, textarea, button { font:99% sans-serif; }pre, code, kbd, samp { font-family: monospace, sans-serif; }
 body, select, input, textarea {color: #444;}h1,h2,h3,h4,h5,h6 { font-weight: bold; }/* always force a scrollbar in non-IE */html { overflow-y: scroll; }a:hover, a:active { outline: none; }a, a:active, a:visited { color: #384f65; }a:hover { color: #036; }ul, ol { margin-left: 1.8em; }ol { list-style-type: decimal; }/* Remove margins for navigation lists */nav ul, nav li { margin: 0; } small { font-size: 85%; }strong, th { font-weight: bold; }td, td img { vertical-align: top; }sub { vertical-align: sub; font-size: smaller; }sup { vertical-align: super; font-size: smaller; }pre {padding: 15px;white-space: pre; /* CSS2 */white-space: pre-wrap; /* CSS 2.1 */white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */word-wrap: break-word; /* IE */} textarea { overflow: auto; }.ie6 legend, .ie7 legend { margin-left: -7px; } /* thnx ivannikolic! */input[type="radio"] { vertical-align: text-bottom; }input[type="checkbox"] { vertical-align: bottom; }.ie7 input[type="checkbox"] { vertical-align: baseline; }.ie6 input { vertical-align: text-bottom; }label, input[type=button], input[type=submit], button { cursor: pointer; }button, input, select, textarea { margin: 0; }/* colors for form validity */input:valid, textarea:valid {}input:invalid, textarea:invalid {border-radius: 1px;-moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red;}.no-boxshadow input:invalid,.no-boxshadow textarea:invalid { background-color: #f0dddd; }::-moz-selection{ background: #ff5e5e; color:#fff; text-shadow: none; }::selection { background:#ff5e5e; color:#fff; text-shadow: none; }a:link { -webkit-tap-highlight-color: #FF5E99; }button {width: auto; overflow: visible; }.ie7 img { -ms-interpolation-mode: bicubic; }
 /* YUI IN THIS PIECE */
 h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6,strong{font-weight:bold; font-family: "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;}abbr,acronym{border-bottom:1px dotted #000;cursor:help;}em{font-style:italic;}blockquote,ul,ol,dl{margin:1em;}ol,ul,dl{margin-left:2em;}ol li{list-style:decimal outside;}ul li{list-style:disc outside;}dl dd{margin-left:1em;}th,td{border:1px solid #000;padding:.5em;}th{font-weight:bold;text-align:center;}caption{margin-bottom:.5em;text-align:center;}p,fieldset,table,pre{margin-bottom:1em;}input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
+img{display:block;}
 
 body{background:#e4eaf2;}
 /*=-=-=-[ SUMMA ]=-=-=-=-=-=-*/
@@ -16,17 +17,25 @@ div#header h1{font-size:350%; line-height:0; text-shadow: -2px -2px 0px rgba(255
 }
 div#header h1 a{}
 /*=-=-=-[ HIGHLIGHTS ]=-=-=-=-=-=-*/
-div#highlights{width:300px; float:right; background:url() #f3f4f9; padding:12px;}
-/*=-=-=-[ CONTENT ]=-=-=-=-=-=-*/
-div#content{width:600px;}
-div#content ul.scroll{margin-left:0px;}
-div#content ul.scroll li{list-style-type: none; clear:left;}
-div#content ul.scroll a.avatar{float:left; margin-right:8px; margin-bottom:8px; 
-background-color:white; padding:5px;
-border-radius: 3px;
--moz-border-radius: 3px;
--webkit-border-radius: 3px;
+div#highlights{width:300px; float:right; background:url() #f3f4f9; padding:12px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
 }
+/*=-=-=-[ CONTENT ]=-=-=-=-=-=-*/
+div#content{width:600px; background-color:#f3f4f9; padding:12px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+div#content .scroll{margin-left:0px;}
+.scroll .chunk{font:13px/1.5 Helvetica Neue,Arial,Helvetica,sans-serif;}
+div#content .scroll div.chunk{list-style-type:none; clear:left; }
+.scroll div.chunk a.avatar{float:left; margin-right:8px; margin-bottom:8px;  padding:5px;
+background:white; border:1px outset rgba(90,90,90,0.2);
+}
+a.avatar img{ padding:0;}
+span.user{font-weight:bold;}
 span.date a{color:#666; font-size:10px; text-decoration:none; padding-left:18px;}
 /*=-=-=-[ FOOTER ]=-=-=-=-=-=-*/
 div#footer{}
