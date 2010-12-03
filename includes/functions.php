@@ -49,10 +49,10 @@ function pullCache($username, $username2){
 
 function cmp_date($a, $b){
     // if (strtotime($a->created_at) == strtotime($b->created_at)) {
-    if ($a->created_at == $b->created_at) {
+    if (strtotime($a->created_at) == strtotime($b->created_at)) {
         return 0;
     }
-    return ($a < $b) ? -1 : 1;
+    return (strtotime($a->created_at) > strtotime($b->created_at)) ? -1 : 1;
 }
 
 
