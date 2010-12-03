@@ -1,5 +1,63 @@
 <?php
-function tweet_fetch($username, $num){
+/*  
+Function tweetFetch()
+calls out to the Twitter API and collect specific user
+tweets up to the number specified.
+*/
+
+function tweetCompress($username){
+	$fileHandle = fopen(dirname(__FILE__).'/cache/circa.json', 'w+')
+		or die("Can't open file\n");
+
+	$tweets = json_decode(@file_get_contents(dirname(__FILE__)."/cache/{$username}-twitter.json"));
+	
+	$user_cache = json_encode($tweets);	
+	
+	$result = fwrite ($fileHandle, $user_cache);
+	
+	if ($result)
+	{
+	     echo "Data written successfully.<br>";
+	} else {
+	     echo "Data write failed.<br>";
+	}
+	
+	fclose($fileHandle);
+
+}
+
+function pullCache($username, $username2){
+// $tweets = json_decode(@file_get_contents(dirname(__FILE__)."/cache/circa.json"));
+	$tweets[1] = json_decode(@file_get_contents(dirname(__FILE__)."/cache/{$username}-twitter.json"));
+	$tweets[2] = json_decode(@file_get_contents(dirname(__FILE__)."/cache/{$username2}-twitter.json"));
+	
+	$combined_tweets = array_merge($tweets[1]->results, $tweets[2]->results);
+	echo "<strong>First tweet:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	</strong> ";
+	echo strtotime($combined_tweets[0]->created_at)." aka: {$combined_tweets[0]->created_at}";
+	echo "<br><strong>Second tweet: </strong>";
+	echo strtotime($combined_tweets[9]->created_at)." aka: {$combined_tweets[8]->created_at}";
+	echo "<br>The ".cmp_date($combined_tweets[0]->created_at,$combined_tweets[1]->created_at)." tweet is newer<br>";
+	usort($combined_tweets, 'cmp_date');
+	echo "<h3>Sorted</h3>";
+	outputFeed($combined_tweets);
+	echo "<pre>";
+	 echo print_r($combined_tweets);
+	echo "</pre>";
+		
+}
+
+
+function cmp_date($a, $b){
+    // if (strtotime($a->created_at) == strtotime($b->created_at)) {
+    if ($a->created_at == $b->created_at) {
+        return 0;
+    }
+    return ($a < $b) ? -1 : 1;
+}
+
+
+
+function tweetFetch($username, $num){
 	$feed = "http://search.twitter.com/search.json?q=from:" . $username . "&amp;rpp=" . $num;
 	 
 	$newfile = dirname(__FILE__)."/cache/{$username}-twitternew.json";
@@ -16,33 +74,15 @@ function tweet_fetch($username, $num){
 	$tweets = @file_get_contents($file);
 	 
 	$tweets = json_decode($tweets);
-	 
-	echo "<ul class=\"scroll\">";
-	for($x=0;$x<$num;$x++) {
-	$str = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]","<a href=\"\\0\">\\0</a>", $tweets->results[$x]->text);
-	$pattern = '/[#|@][^\s]*/';
-	preg_match_all($pattern, $str, $matches);	
-	 
-	foreach($matches[0] as $keyword) {
-	$keyword = str_replace(")","",$keyword);
-	$link = str_replace("#","%23",$keyword);
-	$link = str_replace("@","",$keyword);
-	if(strstr($keyword,"@")) {
-	$search = "<a href=\"http://twitter.com/$link\">$keyword</a>";
-	} else {
-	$link = urlencode($link);
-	$search = "<a href=\"http://twitter.com/#search?q=$link\" class=\"grey\">$keyword</a>";
-	}
-	$str = str_replace($keyword, $search, $str);
-	}
-	$avatar = $tweets->results[$x]->profile_image_url;
-	$time = ago(strtotime($tweets->results[$x]->created_at));
-	$tweet_id = $tweets->results[$x]->id_str;
-	echo "<li><a href=\"http://twitter.com/{$username}\" class=\"avatar\"><img src=\"{$avatar}\"/></a>".$str."<span class=\"date\"><a href=\"http://twitter.com/{$username}/status/{$tweet_id}\">{$time}</a></span></li>\n";
-	}
-	echo "</ul>";
-}
+	outputFeed($tweets->results);
 
+
+}
+/*  
+Function ago()
+Based on script from snipt.net that compares
+a time stamp to how much time has passed.
+*/
 function ago($timestamp){
    $difference = time() - $timestamp;
    $periods = array("second", "minute", "hour", "day", "week", "month", "years", "decade");
@@ -54,7 +94,11 @@ function ago($timestamp){
    $text = "$difference $periods[$j] ago";
    return $text;
   }
-
+/*  
+Function makeRich()
+Process that uses REGEX to detect for links, usernames, and 
+Hash tags inside the tweets.
+*/
 function makeRich($text)
 {
 	/* 
@@ -79,8 +123,11 @@ function makeRich($text)
 	return $text;
 }
 
-
-function twitter_stream($keyword){
+/*  
+Function twitterStream()
+Pulls in tweets for specific topic requested.
+*/
+function twitterStream($keyword){
 	$feed = "http://search.twitter.com/search.json?geocode=42.380054%2C-71.132952%2C50.0mi&lang=en&q=+{$keyword}+since%3A2010-11-26+until%3A2010-11-26+near%3A02138+within%3A50mi&rpp=100";
 	$newfile = dirname(__FILE__)."/cache/terms/{$keyword}-twitternew.json";
 	$file = dirname(__FILE__)."/cache/terms/{$keyword}-twitter.json";
@@ -94,24 +141,32 @@ function twitter_stream($keyword){
 	}
 	$tweets = json_decode(@file_get_contents($file));
 	 echo count($tweets->results);
-	for($x =0; $x < count($tweets->results); $x++){
-		$thumb = $tweets->results[$x]->profile_image_url;
-		$created = ago(strtotime($tweets->results[$x]->created_at));
-		$user = $tweets->results[$x]->from_user;
-		$tweet_id = $tweets->results[$x]->id_str;
-		$tweet = makeRich($tweets->results[$x]->text);
+	outputFeed($tweets->results);
+	}
+
+function outputFeed($combined_tweets){
+	for($x =0; $x < count($combined_tweets); $x++){	
+		$thumb = $combined_tweets[$x]->profile_image_url;
+		$created = ago(strtotime($combined_tweets[$x]->created_at));
+		$created2 = strtotime($combined_tweets[$x]->created_at);
+		$user = $combined_tweets[$x]->from_user;
+		$tweet_id = $combined_tweets[$x]->id_str;
+		$tweet = makeRich($combined_tweets[$x]->text);
 		?>
 		<div class="chunk">
-			<a href="http://twitter.com/<?php echo $user;?>" class="avatar"><img src="<?php echo $thumb;?>" width="48" height="48" title="<?php echo $user;?>" /></a>
+			<a href="http://twitter.com/<?php echo $user;?>" class="avatar">
+				<img src="<?php echo $thumb;?>" width="48" height="48" title="<?php echo $user;?>" /></a>
 			<span class="tweet">
 				<span class="user"><a href="http://twitter.com/<?php echo $user;?>"><?php echo $user;?></a></span>
 				<br /><?php echo $tweet; ?>
 			</span>
 			<span class="date">
-				<a href="http://twitter.com/<?php echo $user;?>/status/<?php echo $tweet_id;?>/"><?php echo $created; ?></a>
+				<a href="http://twitter.com/<?php echo $user;?>/status/<?php echo $tweet_id;?>/"><?php echo $created; ?>(<?php echo $created2; ?>)</a>
 			</span>
 		</div><!-- exit div.chunk -->
-		<?php // continue php
+
+	<?php // continue structure
 	}
+
 }
 ?>
