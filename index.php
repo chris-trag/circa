@@ -54,7 +54,7 @@
 
 		 	</div><!-- exit #content -->
 		 	<div id="footer">
-		 	&copy;<?php echo ($cr_start = 2010) != ($cr_end = date("Y")) ? "$cr_start - $cr_end" : $cr_end ?> Chris Traganos for a final project in <a href="https://www.cs50.net/">CS50</a>.
+		 	&copy;<?php echo ($cr_start = 2010) != ($cr_end = date("Y")) ? "$cr_start - $cr_end" : $cr_end ?> Chris Traganos for a final project in <a href="https://www.cs50.net/">CS50</a>. Open repository at <a href="https://github.com/ctraganos/circa">GitHub</a>
 		 	</div><!-- exit #footer-->
 		 </div><!-- exit #wrapper -->
 	 </div><!-- exit #summa -->
