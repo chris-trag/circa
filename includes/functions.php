@@ -1,8 +1,14 @@
 <?php
+/*
+CIRCA - A web app that live streams relevant, vetted topics & users.
+Author: Chris Traganos <ctraganos@gmail.com>
+Built as the Final Project for CS50 - http://cs50.net
+ */
+ 
 /*  
-Function tweetFetch()
-calls out to the Twitter API and collect specific user
-tweets up to the number specified.
+Function tweetCompress()
+creates the main site API feed of live stream of vetted users
+along with printing out a sucess note if it worked.
 */
 
 function tweetCompress($username){
@@ -19,18 +25,31 @@ function tweetCompress($username){
 
 }
 
+/*  
+Function pullCache()
+Accepts an Array of usernames and in turn
+retrieve their local caches THEN
+compiles them into one stream on the page.
+*/
+
 function pullCache($users){
 	for($a = 0; $a < count($users); $a++){
 		tweetFetch($users[$a]);
 		$tweets[$a] = json_decode(@file_get_contents(dirname(__FILE__)."/cache/{$users[$a]}-twitter.json"))->results;
-		//$combined_tweets = array_push($combined_tweets,$tweets[$a]);
 	}
+	// Following line needs to be cleaned up and more flexible via a loop
 	$combined_tweets = array_merge($tweets[0],$tweets[1],$tweets[2],$tweets[3],$tweets[4],$tweets[5]);
-
-	//$combined_tweets = array_merge($tweets[0]->results, $tweets[1]->results,$tweets[2]->results,$tweets[3]->results);
-	usort($combined_tweets, 'cmp_date');
-	outputFeed($combined_tweets);		
+	
+	usort($combined_tweets, 'cmp_date'); // Sort tweets in the stream by the latest date.
+	outputFeed($combined_tweets); // Crank out the wall		
 }
+
+/*  
+Function tweetFetch()
+calls out to the Twitter Search API for the
+recent twitter results of a specific user and 
+locally caches the individual stream.
+*/
 function tweetFetch($username){
 	$feed = "http://search.twitter.com/search.json?q=from:" . $username . "&amp;rpp=100";
 	 
@@ -45,7 +64,11 @@ function tweetFetch($username){
 	if($oldcontent != $newcontent) copy($newfile, $file);
 }
 
-
+/*  
+Function cmp_date()
+compares array item field "created_at" and compares.
+Needed for uSort() to work.
+*/
 function cmp_date($a, $b){
     if (strtotime($a->created_at) == strtotime($b->created_at)) {
         return 0;
@@ -58,6 +81,7 @@ Function twitterStream()
 Pulls in tweets for specific topic requested.
 */
 function twitterStream($keyword){
+	// This version of the feed has a few more parameters such as GEO & Language.
 	$feed = "http://search.twitter.com/search.json?geocode=42.380054%2C-71.132952%2C50.0mi&lang=en&q=+{$keyword}+since%3A2010-11-26+until%3A2010-11-26+near%3A02138+within%3A50mi&rpp=100";
 	$newfile = dirname(__FILE__)."/cache/terms/{$keyword}-twitternew.json";
 	$file = dirname(__FILE__)."/cache/terms/{$keyword}-twitter.json";
@@ -73,7 +97,12 @@ function twitterStream($keyword){
 	 echo count($tweets->results);
 	outputFeed($tweets->results);
 	}
-
+	
+/*  
+Function outputFeed()
+Takes a compiled set of JSON tweets and outputs HTML
+for each item in the multi-dimensional array.
+*/
 function outputFeed($combined_tweets){
 	for($x =0; $x < count($combined_tweets); $x++){	
 		$thumb = $combined_tweets[$x]->profile_image_url;
@@ -99,7 +128,7 @@ function outputFeed($combined_tweets){
 
 }
 /* 
-Asthetic Formatting for the Streams
+The Following functions are mostly asthetic in nature
 */
 
 /*  
@@ -118,6 +147,7 @@ function ago($timestamp){
    $text = "$difference $periods[$j] ago";
    return $text;
   }
+  
 /*  
 Function makeRich()
 Process that uses REGEX to detect for links, usernames, and 

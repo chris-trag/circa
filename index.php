@@ -1,13 +1,12 @@
 <?php include("includes/functions.php");?>
-<?php define(TERM, "harvard");?>
 <!DOCTYPE html>
  <html lang="en">
  <head>
- 	<title>#CIRCA</title>
+ 	<title>#CIRCA - Vetted Social Media</title>
 
  	<meta charset="utf-8">
- 	<meta name="description" content="A website for social media" />
- 	<meta name="keywords" content="" />
+ 	<meta name="description" content="A website for vetted social media live streams" />
+ 	<meta name="keywords" content="circa, cs50, social-media, traganos" />
  	<meta name="robots" content="" />
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,36 +24,22 @@
 
 		 	</div><!-- exit #header-->
 		 	<div id="highlights">
-			 	<h2>Header Level 2</h2>
+			 	<h2>Photo stream</h2>
 			 	<a href="#"><img src="images/twitpic_test.gif" alt="twitpic" /></a>
-			 	<span class="caption">Lorem ipsum dolor set amit.</span>
+			 	<span class="caption">A wicked awesome pic.</span>
 				<a href="#"><img src="images/twitpic_test-2.gif" alt="twitpic" /></a>
-				<span class="caption">Lorem ipsum dolor set amit.</span>						       
-					<ol>
-					   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-					   <li>Aliquam tincidunt mauris eu risus.</li>
-					</ol>
+				<span class="caption">Check out that poster art.</span>						       
 					
-					<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
-					
-					<h3>Header Level 3</h3>
-					
-					<ul>
-					   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-					   <li>Aliquam tincidunt mauris eu risus.</li>
-					</ul>
-
 		 	</div><!-- exit #highlights-->
 		 	<div id="content">
 				
-				<h1>Wall O' Tweets</h1>
+				<h1>Live Stream</h1>
 				<div class="scroll">
-				<?php
-				echo TERM; // Testing a constant that will be the term to filter results for
-				
+				<?php				
 				/*	This is where I construct an array of twitter users for the app to fetch and sort 
-				*	Eventually this will be constructed from the set of approved users.
+				*	Eventually this will be constructed from the set of approved users via a mySQL call.
 				* 	In the meantime, an array of usernames are passed into the function for processing
+				* 	as I test the overall site functionality -- CDT
 				*/
 				$users = array("techcrunch","mashable","msnbc_tech","guardiantech","forbestech","nytimestech");
 				?>
@@ -62,14 +47,14 @@
 				</div>
 				<div class="clearfix"></div>       
 				<ul>
-				   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-				   <li>Aliquam tincidunt mauris eu risus.</li>
+				   <li>Tweets are pulled from vetted users.</li>
+				   <li>Questions? Contact Chris Traganos by email: ctraganos at gmail dot com.</li>
 				</ul>
 
 
 		 	</div><!-- exit #content -->
 		 	<div id="footer">
-		 	
+		 	&copy;<?php echo ($cr_start = 2010) != ($cr_end = date("Y")) ? "$cr_start - $cr_end" : $cr_end ?> Chris Traganos for a final project in <a href="https://www.cs50.net/">CS50</a>.
 		 	</div><!-- exit #footer-->
 		 </div><!-- exit #wrapper -->
 	 </div><!-- exit #summa -->
