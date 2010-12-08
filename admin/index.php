@@ -19,15 +19,24 @@ define(PAGE, "admin");
 					<input type="submit" value="GO" />
 				</form>
 				<?php 
-			
-				$hashtag = $_POST['hashtag'];
-				if(isset($_POST['hashtag']) && $hashtag != ''){
-					echo "<p>You wrote the word: {$hashtag}</p>\n";
-					echo "<div class=\"scroll\"";
-					twitterStream(strtolower($hashtag));
-					echo "</div>";
-					echo "<div class='clearfix'></div>";
-				}
+				$hashtag = mysql_real_escape_string($_POST['hashtag']);
+				if(isset($_POST['hashtag']) && $hashtag != ''){?>
+					<div class="scroll">
+						<form method="post" action="/admin/vouch.php">
+						<h3>Describe the livestream reference / backstory</h3>
+						<textarea cols="50" rows="4" name="description"></textarea>
+						<h3>Please provide a URL to reference the </h3>
+						<input type="text" name="source_link" />
+						<br><br><br>
+						<p>Current chatter about: <?php echo $hashtag;?></p>
+						<?php twitterStream(strtolower($hashtag));?>
+						<input type="hidden" name="hashtag" value="<?php echo $hashtag;?>"/>
+						<input type="submit" value="Launch Stream!" />
+						</form>
+					</div>
+					<div class='clearfix'></div>
+				<?php
+				} // end hashtag processing
 				?>
 				       
 				<ul>

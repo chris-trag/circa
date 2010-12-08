@@ -19,6 +19,9 @@ H E A D E R
  	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+	
+	<script src="/js/plugins.js"></script>
+	<script src="/js/script.js"></script>
 
  </head>
  <body>

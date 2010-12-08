@@ -17,8 +17,7 @@ require_once("includes/common.php");
 				$users = array("techcrunch","mashable","msnbc_tech","guardiantech","forbestech","nytimestech","cnn","time","reuters","bbc","wsj","harvard" );
 				?>
 				<?php pullCache($users); ?>
-				</div>
-				<div class="clearfix"></div>       
+				</div>    
 				<ul>
 				   <li>Tweets are pulled from vetted users.</li>
 				   <li>Questions? Contact Chris Traganos by email: ctraganos at gmail dot com.</li>
