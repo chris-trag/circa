@@ -33,12 +33,15 @@ compiles them into one stream on the page.
 */
 
 function pullCache($users){
+	$combined_tweets = array();
 	for($a = 0; $a < count($users); $a++){
 		tweetFetch($users[$a]);
 		$tweets[$a] = json_decode(@file_get_contents(dirname(__FILE__)."/cache/{$users[$a]}-twitter.json"))->results;
+		$combined_tweets = array_merge($combined_tweets, $tweets[$a]);
 	}
 	// Following line needs to be cleaned up and more flexible via a loop
-	$combined_tweets = array_merge($tweets[0],$tweets[1],$tweets[2],$tweets[3],$tweets[4],$tweets[5]);
+	//$combined_tweets = array_merge($tweets[0],$tweets[1],$tweets[2],$tweets[3],$tweets[4],$tweets[5]);
+	
 	
 	usort($combined_tweets, 'cmp_date'); // Sort tweets in the stream by the latest date.
 	outputFeed($combined_tweets); // Crank out the wall		
@@ -82,7 +85,7 @@ Pulls in tweets for specific topic requested.
 */
 function twitterStream($keyword){
 	// This version of the feed has a few more parameters such as GEO & Language.
-	$feed = "http://search.twitter.com/search.json?geocode=42.380054%2C-71.132952%2C50.0mi&lang=en&q=+{$keyword}+since%3A2010-11-26+until%3A2010-11-26+near%3A02138+within%3A50mi&rpp=100";
+	$feed = "http://search.twitter.com/search.json?&lang=en&q={$keyword}&rpp=100";
 	$newfile = dirname(__FILE__)."/cache/terms/{$keyword}-twitternew.json";
 	$file = dirname(__FILE__)."/cache/terms/{$keyword}-twitter.json";
 	
@@ -111,7 +114,13 @@ function outputFeed($combined_tweets){
 		$tweet_id = $combined_tweets[$x]->id_str;
 		$tweet = makeRich($combined_tweets[$x]->text);
 		?>
+
 		<div class="chunk">
+		<?php if(PAGE == "admin"){?>
+		<div class="vouch">
+			<input type="checkbox" value="<?php echo $user;?>">
+		</div>
+		<?php } // end admin options ?>
 			<a href="http://twitter.com/<?php echo $user;?>" class="avatar">
 				<img src="<?php echo $thumb;?>" width="48" height="48" title="<?php echo $user;?>" /></a>
 			<span class="tweet">

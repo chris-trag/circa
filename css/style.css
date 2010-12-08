@@ -35,12 +35,13 @@ div#content{width:600px; background-color:#f3f4f9; padding:12px;
 border-radius: 5px;
 }
 div#content .scroll{margin-left:0px;}
-.scroll .chunk{font:13px/1.5 Helvetica Neue,Arial,Helvetica,sans-serif;}
-div#content .scroll div.chunk{list-style-type:none; clear:left; }
+.scroll .chunk{font:13px/1.5 Helvetica Neue,Arial,Helvetica,sans-serif;position:relative;}
+div#content .scroll div.chunk{list-style-type:none; clear:left;  }
 .scroll div.chunk a.avatar{float:left; margin-right:8px; margin-bottom:8px;  padding:5px;
 background:white; border:1px outset rgba(90,90,90,0.2);
-
 }
+div.vouch{padding:0px; width:60px; height:60px;position:absolute; left:0; background-color:rgba(243,243,241,0.3);}
+div.vouch:hover{background-color:rgba(243,243,241,0.0);}
 pre{font-size:12px;}
 a.avatar img{ padding:0;}
 span.user{font-weight:bold;}
