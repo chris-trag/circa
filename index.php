@@ -25,7 +25,19 @@ require_once("includes/common.php");
 					$hashtag = $row_sum["hashtag"];
 					$description = $row_sum["description"];
 					$source_link = $row_sum["source_link"];
-					$users = explode(",", $row_sum["users"]);
+/*
+					print_r($row_sum["users"]);
+					$str = substr($str,'',-1);
+					echo "<br>";
+*/					
+					$users = substr($row_sum["users"],0,-1);
+					$users = explode(",", $users);
+					
+					echo "<br>".$users;
+/*
+					echo $users."<br>";
+					print_r($users);
+*/
 					
 				}else{
 				// Going to set these as a default to show people the example

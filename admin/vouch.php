@@ -15,8 +15,11 @@ then writes the infomation to the dB
     $description = mysql_real_escape_string($_POST["description"]);
     $source_link = mysql_real_escape_string($_POST['source_link']);
     
-    
-	$users = mysql_real_escape_string(implode(", ", $user));
+/*
+     while (list($key,$val) = @each ($user))
+		$users .= "$val, "; 
+*/
+	$users = mysql_real_escape_string(implode(",", $user));
 	//$test = explode(",", $users);
 	    
 /*
