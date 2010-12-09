@@ -28,6 +28,7 @@ define(PAGE, "admin");
 						<h3>Please provide a URL to reference the </h3>
 						<input type="text" name="source_link" />
 						<br><br><br>
+						<h3>Select users to be apart of the LiveStream for <?php echo strtoupper($hastag); ?></h3>
 						<p>Current chatter about: <?php echo $hashtag;?></p>
 						<?php twitterStream(strtolower($hashtag));?>
 						<input type="hidden" name="hashtag" value="<?php echo $hashtag;?>"/>

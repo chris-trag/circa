@@ -234,6 +234,22 @@ CS50 Goodies -- thanks!
         exit;
     }
 
+    /*
+     * void
+     * apologize($message)
+     *
+     * Apologizes to user by displaying a page with message.
+     */
+
+    function apologize($message)
+    {
+        // require template
+        require_once("apology.php");
+
+        // exit immediately since we're apologizing
+        exit;
+    }
+
 
 
 ?>

@@ -1,0 +1,13 @@
+
+Initial table build for hashtags:
+
+ CREATE TABLE `cs50_circa`.`streams` (
+`id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`hashtag` VARCHAR( 255 ) NOT NULL ,
+`description` TEXT NOT NULL ,
+`source_link` VARCHAR( 255 ) NOT NULL ,
+`users` TEXT NOT NULL ,
+UNIQUE (
+`hashtag`
+)
+) ENGINE = MYISAM 
